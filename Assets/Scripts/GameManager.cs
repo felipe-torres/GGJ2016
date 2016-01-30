@@ -7,6 +7,9 @@ public class GameManager : MonoBehaviour {
 
 	public int Level { get; set; }
 
+	public ColorPalettes colorPalettes;
+	private ColorPalette currentPalette;
+
 	void Awake() 
 	{
 		Instance = this;
@@ -15,8 +18,8 @@ public class GameManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		Level = 0;
-
-		InvokeRepeating("ChangeLevel", 2, 5);
+		ChooseRandomColorPalette();
+		InvokeRepeating("ChangeLevel", 2, 10);
 	}
 	
 	// Update is called once per frame
@@ -29,5 +32,16 @@ public class GameManager : MonoBehaviour {
 		print("Level change!");
 		Level++;
 		WaveManager.Instance.LevelChange();
+	}
+
+	private void ChooseRandomColorPalette()
+	{
+		CurrentPalette = colorPalettes.GetRandomPalette();
+	}
+
+	public ColorPalette CurrentPalette 
+	{
+		get { return currentPalette; }
+		set { currentPalette = value; }
 	}
 }

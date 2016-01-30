@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class VerticalWave : MonoBehaviour {
+public class HorizontalWave : MonoBehaviour {
 
 	private ParticleSystem pS;
 	public float decreaseRate = 0.01f;
