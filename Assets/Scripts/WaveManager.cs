@@ -87,19 +87,19 @@ public class WaveManager : MonoBehaviour {
         switch (level)
         {
             case 1:
-                wavePeriod = 3;
+                wavePeriod = 5;
                 break;
             case 2:
-                wavePeriod = 4;
+                wavePeriod = 5;
                 break;
             case 3:
-                wavePeriod = 4;
+                wavePeriod = 5;
                 break;
             case 4:
-                wavePeriod = 2;
+                wavePeriod = 5;
                 break;
             default:
-                wavePeriod = 3;
+                wavePeriod = 5;
                 break;
         }
 
@@ -118,7 +118,7 @@ public class WaveManager : MonoBehaviour {
     /// <summary>Spawns a number of waves along a period of time.</summary>
     IEnumerator Spawnwaves(float wavespawnPeriod)
     {
-        int num2Spawn = Random.Range(1, 5); // Wave number function
+        int num2Spawn = 1; // Wave number function goes here
 
         for (int i = 0; i < num2Spawn; i++)
         {
@@ -128,6 +128,11 @@ public class WaveManager : MonoBehaviour {
             GameObject Wave = GetWave();
             if(Wave)
             {
+            	// Choose random color from color palette
+            	Color[] currentPaletteColors = GameManager.Instance.CurrentPalette.Colors;
+            	Color waveColor = currentPaletteColors[Random.Range(0, currentPaletteColors.Length)];
+            	Wave.GetComponent<RayWave>().Ps.startColor = waveColor;
+
                 Wave.transform.localPosition = circfundRand;
                 Wave.transform.LookAt(Vector3.zero);
                 Wave.GetComponent<RayWave>().BeginMove();               

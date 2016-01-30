@@ -29,10 +29,9 @@ public class VerticalWave : MonoBehaviour {
 		var sh = pS.shape;
 		if(sh.radius <= 0)
 		{
-			Player.Instance.WaveCollision();
 			this.gameObject.SetActive(false);
 		}
 	}
 
-	
+
 }

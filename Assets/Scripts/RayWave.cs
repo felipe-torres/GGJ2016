@@ -2,48 +2,23 @@
 using System.Collections;
 using DG.Tweening;
 
+/// <summary>
+/// A colored wave consisting o a ray, pointing towards the player and traveling forward and a particle system for effects
+/// </summary>
 public class RayWave : MonoBehaviour {
 
-	private ParticleSystem pS;
 	public float secondsToDestination = 6f;
+	public ParticleSystem pS;
 
 	// Use this for initialization
 	void Start () {
-		pS = GetComponent<ParticleSystem>();
-	}
-
-	void OnEnable()
-	{
-		//UpdatePosition();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 	}
 
-	void UpdatePosition()
-	{		
-		transform.DOMove(transform.forward, secondsToDestination);
-	}
-
-	void OnTriggerEnter(Collider other)
-	{
-		print("CollisionWithRayHasBegun");
-		var sh = pS.shape;		
-		Player.Instance.WaveCollision();
-		
-	}
-
-	void OnTriggerStay(Collider other)
-	{
-
-	}
-
-	void OnTriggerExit(Collider other)
-	{
-		print("CollisionWithRayHasEnded");
-		this.gameObject.SetActive(false);
-	}
+	
 
 	public void BeginMove()
 	{
@@ -53,5 +28,11 @@ public class RayWave : MonoBehaviour {
 	private void Kill()
 	{
 		gameObject.SetActive(false);
+	}
+
+	public ParticleSystem Ps
+	{
+		get { return pS; }
+		set { pS = value; }
 	}
 }

@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour {
 	public ColorPalettes colorPalettes;
 	private ColorPalette currentPalette;
 
+	public Level CurrentLevel;
+
 	void Awake() 
 	{
 		Instance = this;
@@ -22,7 +24,7 @@ public class GameManager : MonoBehaviour {
 	void Start () {
 		Level = 0;
 		ChooseRandomColorPalette();
-		InvokeRepeating("ChangeLevel", 2, 10);
+		InvokeRepeating("ChangeLevel", 2, 30);
 	}
 	
 	// Update is called once per frame
