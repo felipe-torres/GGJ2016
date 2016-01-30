@@ -33,4 +33,6 @@ public class VerticalWave : MonoBehaviour {
 			this.gameObject.SetActive(false);
 		}
 	}
+
+	
 }

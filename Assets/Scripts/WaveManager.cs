@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
+using DG.Tweening;
 
 /// <summary>In charge of wave creation and wave destruction, based on a pooling pattern.</summary>
 public class WaveManager : MonoBehaviour {
@@ -14,6 +15,9 @@ public class WaveManager : MonoBehaviour {
     public GameObject WavePoolParent;
 
     private bool hasStartedSpawn = false;
+
+    public float spawnRadius = 20;
+    public float spawnHeight = 2;
 
     void Awake()
     {
@@ -118,16 +122,15 @@ public class WaveManager : MonoBehaviour {
 
         for (int i = 0; i < num2Spawn; i++)
         {
-            //Vector2 circRand = Random.insideUnitCircle * 10;
-            //Vector3 spawnPosition = new Vector3(circRand.x, 10.0f, circRand.y);
-            //Vector3 spawnPosition = new Vector3(circRand.x, 10.0f, circRand.y);
+            Vector3 circfundRand = (new Vector3(Random.Range(-1f,1f), spawnHeight, Random.Range(-1f,1f)).normalized * spawnRadius);
 
-        	float randomYRot = Random.Range(0, 361);
 
             GameObject Wave = GetWave();
             if(Wave)
             {
-                Wave.transform.localRotation = Quaternion.Euler(0, randomYRot, 0);
+                Wave.transform.localPosition = circfundRand;
+                Wave.transform.LookAt(Vector3.zero);
+                Wave.GetComponent<RayWave>().BeginMove();               
             }
             
             yield return new WaitForSeconds(Random.Range(0.0f, wavespawnPeriod)); // Spawns at random times inside the item spawn period       

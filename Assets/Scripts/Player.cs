@@ -7,6 +7,7 @@ using System.Collections;
 public class Player : MonoBehaviour {
 
 	public static Player Instance { get; set; } 
+	public Sprite ColorColector;
 
 	void Awake () 
 	{
