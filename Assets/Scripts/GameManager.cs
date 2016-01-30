@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour {
 
 	public Level CurrentLevel;
 
+	public SandJar sandJar;
+
 	void Awake() 
 	{
 		Instance = this;
@@ -42,6 +44,7 @@ public class GameManager : MonoBehaviour {
 	private void ChooseRandomColorPalette()
 	{
 		CurrentPalette = colorPalettes.GetRandomPalette();
+		sandJar.Initialize(currentPalette);
 	}
 
 	public ColorPalette CurrentPalette 

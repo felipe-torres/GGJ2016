@@ -20,4 +20,17 @@ public class ColorPalettes : MonoBehaviour {
 		return Palettes[index];
 	}
 
+	public static int GetColorIndexFromColor(Color color)
+	{
+		ColorPalette currentPalette = GameManager.Instance.CurrentPalette;
+		for(int i = 0; i < currentPalette.Colors.Length; i++)
+		{	
+			if(Mathf.Approximately(color.r, currentPalette.Colors[i].r))
+				return i;
+		}
+
+		return 0;		
+	}
 }
+
+

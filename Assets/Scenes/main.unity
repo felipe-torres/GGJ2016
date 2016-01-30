@@ -156,8 +156,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.8, y: 1.28, z: 5.78}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.8, y: 0.46, z: 5.78}
+  m_Center: {x: 0, y: 0.25, z: 0}
 --- !u!54 &38208881
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -540,6 +540,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colorPalettes: {fileID: 1290419684}
+  sandJar: {fileID: 1956104668}
 --- !u!4 &494768823
 Transform:
   m_ObjectHideFlags: 0
@@ -595,7 +596,7 @@ MonoBehaviour:
   maxWaves: 10
   WavePoolParent: {fileID: 624616767}
   spawnRadius: 60
-  spawnHeight: 0.2
+  spawnHeight: 8
 --- !u!1 &954292916
 GameObject:
   m_ObjectHideFlags: 0
@@ -1146,6 +1147,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba6efc42e62465147821c8af3f539194, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1956104667
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1956104669}
+  - 114: {fileID: 1956104668}
+  m_Layer: 0
+  m_Name: SandJar
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1956104668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1956104667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c65eeb3ac4dbba44bcaf75d670eae67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1956104669
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1956104667}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.1259212, y: -0.1637187, z: 0.4639988}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
 --- !u!1 &2127056607
 GameObject:
   m_ObjectHideFlags: 0

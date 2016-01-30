@@ -122,7 +122,8 @@ public class WaveManager : MonoBehaviour {
 
         for (int i = 0; i < num2Spawn; i++)
         {
-            Vector3 circfundRand = (new Vector3(Random.Range(-1f,1f), spawnHeight, Random.Range(-1f,1f)).normalized * spawnRadius);
+            Vector3 circfundRand = (new Vector3(Random.Range(-1f,1f), 0, Random.Range(-1f,1f)).normalized * spawnRadius);
+            circfundRand = new Vector3(circfundRand.x, spawnHeight, circfundRand.z);
 
 
             GameObject Wave = GetWave();
