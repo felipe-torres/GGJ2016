@@ -24,8 +24,6 @@ public class Cam360Controller : MonoBehaviour
 	private Vector3 dragDelta;
 	public bool DragInertia = true;
 
-	// Debug
-	public Text DeltaText;
 
 
 	void Awake()
@@ -98,7 +96,6 @@ public class Cam360Controller : MonoBehaviour
 	/// </summary>
 	private void PanRotation()
 	{
-		//DeltaText.text = Input.GetAxis("Mouse X") + " | " + Input.GetAxis("Mouse Y");
 
 		if (Input.GetMouseButtonDown(0))
 		{
