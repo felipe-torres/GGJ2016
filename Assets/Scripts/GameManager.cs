@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Contains game's main flow, manages level changes and detects winning or losing condition
+/// </summary>
 public class GameManager : MonoBehaviour {
 
 	public static GameManager Instance { get; set; }

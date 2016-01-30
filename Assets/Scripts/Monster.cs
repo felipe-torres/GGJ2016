@@ -2,6 +2,9 @@
 using System.Collections;
 using DG.Tweening;
 
+/// <summary>
+/// Manages the monster's functionality
+/// </summary>
 public class Monster : MonoBehaviour {
 
 	public Transform Player;

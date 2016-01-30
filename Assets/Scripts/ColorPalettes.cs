@@ -7,6 +7,9 @@ public struct ColorPalette
 	public Color[] Colors;
 };
 
+/// <summary>
+/// Contains different color palettes that will be used by different game elements
+/// </summary>
 public class ColorPalettes : MonoBehaviour {
 
 	public ColorPalette[] Palettes;
