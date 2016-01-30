@@ -87,13 +87,13 @@ public class WaveManager : MonoBehaviour {
         switch (level)
         {
             case 1:
-                wavePeriod = 5;
+                wavePeriod = 8;
                 break;
             case 2:
-                wavePeriod = 5;
+                wavePeriod = 7;
                 break;
             case 3:
-                wavePeriod = 5;
+                wavePeriod = 6;
                 break;
             case 4:
                 wavePeriod = 5;
