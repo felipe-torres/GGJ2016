@@ -47,6 +47,7 @@ public class SandJar : MonoBehaviour {
 		jar.ColorsFilled[jar.currentIndex] = color;
 		AddLayerToPlayerJar(color, jar.currentIndex);
 		jar.currentIndex++;
+
 		if(jar.currentIndex >= jar.ColorsToFill.Count)
 		{
 			// Check results in game manager

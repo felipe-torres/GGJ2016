@@ -77,6 +77,8 @@ public class GameManager : MonoBehaviour {
 			GameObject.Destroy(child.gameObject);
 		}
 
+		AudioManager.Instance.ResetAll();
+
 		yield return new WaitForSeconds(2);		
 
 		// Restart all
@@ -128,7 +130,7 @@ public class GameManager : MonoBehaviour {
 		Vector3 screenInWorldSpace = Player.Instance.orthoCamera.ScreenToWorldPoint(new Vector3(0, Screen.height, 0f));
 		sandJar.playerSandJarParent.transform.parent.DOLocalMove(new Vector3(screenInWorldSpace.x*3, screenInWorldSpace.y/4, 0.54f), 2f);
 
-		InvokeRepeating("ChangeLevel", 2, 30);
+		InvokeRepeating("ChangeLevel", 2, 15);
 	}
 
 	public ColorPalette CurrentPalette 

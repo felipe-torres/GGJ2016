@@ -88,12 +88,15 @@ public class WaveManager : MonoBehaviour {
         {
             case 1:
                 wavePeriod = 8;
+                AudioManager.Instance.ActivatePerc1();
                 break;
             case 2:
                 wavePeriod = 7;
+                AudioManager.Instance.ActivatePerc2();
                 break;
             case 3:
                 wavePeriod = 6;
+                AudioManager.Instance.ActivateHarmony();
                 break;
             case 4:
                 wavePeriod = 5;
