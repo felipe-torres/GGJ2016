@@ -45,6 +45,7 @@ public class GameManager : MonoBehaviour {
 	{
 		CurrentPalette = colorPalettes.GetRandomPalette();
 		sandJar.Initialize(currentPalette);
+		SandJar.CreateTargetSandJar(currentPalette);
 	}
 
 	public ColorPalette CurrentPalette 
