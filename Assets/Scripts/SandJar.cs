@@ -10,6 +10,8 @@ public class SandJar : MonoBehaviour {
 	private Color[] ColorsToFill;
 	private float[] PercentageFilled;
 
+	public int MaximumLayerNumber = 10;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -48,6 +50,9 @@ public class SandJar : MonoBehaviour {
 	{
 		List<Color> remainingColors = new List<Color> (palette.Colors);
 		List<Color> result = new List<Color>();
+
+		//int layerNumber = Random.Range(remainingColors.Count, MaximumLayerNumber);
+
 		while(remainingColors.Count > 0)
 		{
 			// Take one reandomly from available and put it on the queue
