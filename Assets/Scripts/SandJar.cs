@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 /// <summary>
 /// Will contain data on the sand jar completeness (color and completeness percentage)
@@ -22,7 +23,7 @@ public class SandJar : MonoBehaviour {
 
 	public void Fill(int ColorIndex, float value)
 	{
-		print("Jar filled at: "+ColorIndex+" , with valur of: "+ value);
+		print("Jar filled at: "+ColorIndex+" , with value of: "+ value);
 		PercentageFilled[ColorIndex] += value;
 
 		CheckColorFilled(ColorIndex);
@@ -41,5 +42,42 @@ public class SandJar : MonoBehaviour {
 				// All colors are completed, call game manager to end game with victory condition	
 			}
 		}
+	}
+
+	public static void CreateTargetSandJar(ColorPalette palette)
+	{
+		List<Color> remainingColors = new List<Color> (palette.Colors);
+		List<Color> result = new List<Color>();
+		while(remainingColors.Count > 0)
+		{
+			// Take one reandomly from available and put it on the queue
+			int randomIndex = Random.Range(0, remainingColors.Count);
+			Color targetColor = remainingColors[randomIndex];
+			remainingColors.RemoveAt(randomIndex);
+			result.Add(targetColor);
+
+			if(result.Count > 1)
+			{
+				// Check if repeating
+				if((Random.Range(0.0f,1.0f) > 0.5f))
+				{
+					for(int i = 0; i < result.Count - 1; i++)
+					{
+						// Maybe repeat all except the last one
+						if((Random.Range(0.0f,1.0f) > 0.5f))
+						{
+							result.Add(result[i]);
+							break;
+						}
+					}					
+				}
+			}
+		}
+
+		for(int i = 0; i < result.Count; i++)
+		{
+			print(result[i]);
+		}	
+
 	}
 }
