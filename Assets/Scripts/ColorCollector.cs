@@ -19,20 +19,26 @@ public class ColorCollector : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other)
 	{
-		print("CollisionWithRayHasBegun");
-		GetComponent<SpriteRenderer>().color = other.GetComponent<RayWave>().Ps.startColor;
-		timeStartedCollecting = Time.time;
+		if(!GameManager.Instance.isGameOver)
+		{
+			print("CollisionWithRayHasBegun");
+			GetComponent<SpriteRenderer>().color = other.GetComponent<RayWave>().Ps.startColor;
+			timeStartedCollecting = Time.time;
+		}
 	}
 
 	void OnTriggerExit(Collider other)
 	{
-		print("CollisionWithRayHasEnded");
-		GetComponent<SpriteRenderer>().color = Color.white;
+		if(!GameManager.Instance.isGameOver)
+		{
+			print("CollisionWithRayHasEnded");
+			GetComponent<SpriteRenderer>().color = Color.white;
 
-		float amountCollected = Time.time - timeStartedCollecting;
-		int colorIndex = ColorPalettes.GetColorIndexFromColor(other.GetComponent<RayWave>().Ps.startColor);
+			float amountCollected = Time.time - timeStartedCollecting;
+			int colorIndex = ColorPalettes.GetColorIndexFromColor(other.GetComponent<RayWave>().Ps.startColor);
 
-		//GameManager.Instance.sandJar.Fill(colorIndex, amountCollected/100);
-		GameManager.Instance.sandJar.Fill(other.GetComponent<RayWave>().Ps.startColor);
+			//GameManager.Instance.sandJar.Fill(colorIndex, amountCollected/100);
+			GameManager.Instance.sandJar.Fill(other.GetComponent<RayWave>().Ps.startColor);
+		}
 	}
 }

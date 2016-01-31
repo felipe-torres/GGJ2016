@@ -51,7 +51,24 @@ public class SandJar : MonoBehaviour {
 		{
 			// Check results in game manager
 			print("Jar is full");
+			GameManager.Instance.StartGameOver(CompareJars());
 		}
+	}
+
+	private bool CompareJars()
+	{
+		bool result = true;
+
+		for (int i = 0; i < jar.ColorsToFill.Count; i++) 
+		{
+			print(jar.ColorsToFill[i].r + " " + jar.ColorsFilled[i].r);
+
+			result &= Mathf.Approximately(jar.ColorsToFill[i].r, jar.ColorsFilled[i].r);
+
+			if(!result) return false;
+		}
+
+		return true;
 	}
 
 	private void CheckColorFilled(int ColorIndex)

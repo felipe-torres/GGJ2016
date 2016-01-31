@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour {
 
 	public SandJar sandJar;
 
+	public bool isGameOver = false;
+
 	void Awake() 
 	{
 		Instance = this;
@@ -25,9 +27,15 @@ public class GameManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		Restart();
+		
+	}
+
+	private void Restart () 
+	{
+		isGameOver = false;
 		Level = 0;
 		ChooseRandomColorPalette();
-		
 	}
 	
 	// Update is called once per frame
@@ -49,8 +57,35 @@ public class GameManager : MonoBehaviour {
 		StartCoroutine(ShowTargetJar());
 	}
 
+	public void StartGameOver(bool hasWon)
+	{
+		isGameOver = true;
+		CancelInvoke("ChangeLevel");
+		StartCoroutine(GameOverSequence(hasWon));
+
+		
+	}
+
+	private IEnumerator GameOverSequence(bool hasWon)
+	{
+		// Destroy current jars
+		foreach (Transform child in sandJar.targetSandJarParent.transform) {
+			GameObject.Destroy(child.gameObject);
+		}
+
+		foreach (Transform child in sandJar.playerSandJarParent.transform) {
+			GameObject.Destroy(child.gameObject);
+		}
+
+		yield return new WaitForSeconds(2);		
+
+		// Restart all
+		Restart();
+	}
+
 	private IEnumerator ShowTargetJar()
 	{
+		Player.Instance.orthoCamera.DOOrthoSize(0.2f, 2f);
 		yield return new WaitForSeconds(1f);
 		sandJar.targetSandJarParent.transform.DORotate(new Vector3(15, 0, 15), 0f);
 
