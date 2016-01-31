@@ -32,7 +32,7 @@ public class ColorCollector : MonoBehaviour {
 		float amountCollected = Time.time - timeStartedCollecting;
 		int colorIndex = ColorPalettes.GetColorIndexFromColor(other.GetComponent<RayWave>().Ps.startColor);
 
-		GameManager.Instance.sandJar.Fill(colorIndex, amountCollected/100);
-
+		//GameManager.Instance.sandJar.Fill(colorIndex, amountCollected/100);
+		GameManager.Instance.sandJar.Fill(other.GetComponent<RayWave>().Ps.startColor);
 	}
 }

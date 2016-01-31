@@ -8,6 +8,9 @@ public class Player : MonoBehaviour {
 
 	public static Player Instance { get; set; } 
 
+	public Camera camera;
+	public Camera orthoCamera;
+
 	void Awake () 
 	{
 		Instance = this;

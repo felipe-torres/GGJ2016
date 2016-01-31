@@ -5,12 +5,22 @@ using System.Collections.Generic;
 /// <summary>
 /// Will contain data on the sand jar completeness (color and completeness percentage)
 /// </summary>
-public class SandJar : MonoBehaviour {
+public struct Jar 
+{
+	public List<Color> ColorsToFill;
+	public List<float> PercentageFilled;
+	public Color[] ColorsFilled;
+	public int currentIndex;
+};
 
-	private Color[] ColorsToFill;
-	private float[] PercentageFilled;
+public class SandJar : MonoBehaviour {	
 
-	public int MaximumLayerNumber = 10;
+	private Jar jar;
+	public static int MaximumLayerNumber = 5;
+	public GameObject sandLayerPrefab;
+	
+	public GameObject targetSandJarParent;
+	public GameObject playerSandJarParent;
 
 	// Use this for initialization
 	void Start () {
@@ -19,23 +29,36 @@ public class SandJar : MonoBehaviour {
 
 	public void Initialize(ColorPalette palette)
 	{
-		ColorsToFill = new Color[palette.Colors.Length];
-		PercentageFilled = new float[ColorsToFill.Length];
+		jar = SandJar.CreateTargetSandJar(palette);
+		CreateTargetSandJarGameObject(jar, targetSandJarParent.transform);
 	}
 
 	public void Fill(int ColorIndex, float value)
 	{
 		print("Jar filled at: "+ColorIndex+" , with value of: "+ value);
-		PercentageFilled[ColorIndex] += value;
+		jar.PercentageFilled[ColorIndex] += value;
 
 		CheckColorFilled(ColorIndex);
 	}
 
+	public void Fill(Color color)
+	{
+		//print("Jar filled at: "+ColorIndex+" , with value of: "+ value);
+		jar.ColorsFilled[jar.currentIndex] = color;
+		AddLayerToPlayerJar(color, jar.currentIndex);
+		jar.currentIndex++;
+		if(jar.currentIndex >= jar.ColorsToFill.Count)
+		{
+			// Check results in game manager
+			print("Jar is full");
+		}
+	}
+
 	private void CheckColorFilled(int ColorIndex)
 	{
-		if(PercentageFilled[ColorIndex] >= 1f )
+		if(jar.PercentageFilled[ColorIndex] >= 1f )
 		{
-			if(ColorIndex < PercentageFilled.Length - 1)
+			if(ColorIndex < jar.PercentageFilled.Count - 1)
 			{				
 				// Call game manager to change to next color
 			}
@@ -46,12 +69,12 @@ public class SandJar : MonoBehaviour {
 		}
 	}
 
-	public static void CreateTargetSandJar(ColorPalette palette)
+	public static Jar CreateTargetSandJar(ColorPalette palette)
 	{
 		List<Color> remainingColors = new List<Color> (palette.Colors);
 		List<Color> result = new List<Color>();
 
-		//int layerNumber = Random.Range(remainingColors.Count, MaximumLayerNumber);
+		int layerNumber = Random.Range(remainingColors.Count, MaximumLayerNumber);
 
 		while(remainingColors.Count > 0)
 		{
@@ -61,7 +84,7 @@ public class SandJar : MonoBehaviour {
 			remainingColors.RemoveAt(randomIndex);
 			result.Add(targetColor);
 
-			if(result.Count > 1)
+			if(result.Count > 1 && result.Count <= layerNumber)
 			{
 				// Check if repeating
 				if((Random.Range(0.0f,1.0f) > 0.5f))
@@ -79,10 +102,46 @@ public class SandJar : MonoBehaviour {
 			}
 		}
 
+		// Assign layer percentages
+		List<float> layerAmount = new List<float>();
+		float equalAmount = 1f / result.Count;
+
 		for(int i = 0; i < result.Count; i++)
 		{
-			print(result[i]);
-		}	
+			layerAmount.Add(equalAmount);
+		}
 
+		Jar resultJar;
+		resultJar.ColorsToFill = result;
+		resultJar.PercentageFilled = layerAmount;
+		resultJar.ColorsFilled = new Color[result.Count];
+		resultJar.currentIndex = 0;
+
+		return resultJar;
+
+	}
+
+	public GameObject CreateTargetSandJarGameObject(Jar jar, Transform parent)
+	{
+		for (int i = 0; i < jar.ColorsToFill.Count; i++) 
+		{
+			GameObject layer = Instantiate(sandLayerPrefab);
+			layer.GetComponent<Renderer>().material.color = jar.ColorsToFill[i];
+
+			layer.transform.parent = parent;
+			layer.transform.localPosition = Vector3.zero;
+			layer.transform.position += Vector3.up*layer.transform.localScale.y*2*i;
+		}
+		return sandLayerPrefab;
+	}
+
+	public void AddLayerToPlayerJar(Color color, int index)
+	{
+		GameObject layer = Instantiate(sandLayerPrefab);
+		layer.GetComponent<Renderer>().material.color = color;
+
+		layer.transform.parent = playerSandJarParent.transform;
+		layer.transform.localPosition = Vector3.zero;
+		layer.transform.position += Vector3.up*layer.transform.localScale.y*2*index;
 	}
 }
